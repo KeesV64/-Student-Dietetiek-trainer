@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiëtetiekTrainer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .view {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .tab-content {
+            display: none;
+        }
+        .active-tab {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigatie -->
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">DiëtetiekTrainer</h1>
+            <div class="flex space-x-4">
+                <button id="nav-home" class="nav-btn px-3 py-2 rounded hover:bg-blue-700 bg-blue-700">Home</button>
+                <button id="nav-patients" class="nav-btn px-3 py-2 rounded hover:bg-blue-700">Patiënten</button>
+                <button id="nav-knowledge" class="nav-btn px-3 py-2 rounded hover:bg-blue-700">Kennisbank</button>
+                <button id="nav-practice" class="nav-btn px-3 py-2 rounded hover:bg-blue-700">Oefeningen</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4">
+        <!-- HOME VIEW -->
+        <div id="home-view" class="view active">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h2 class="text-2xl font-bold mb-4">Welkom bij DiëtetiekTrainer</h2>
+                <p class="mb-4">
+                    Deze applicatie helpt diëtetiekstudenten bij het ontwikkelen van vaardigheden 
+                    voor het geven van gepersonaliseerd voedingsadvies.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h3 class="font-bold text-lg mb-2">Patiëntprofielen</h3>
+                        <p>Oefen met diverse patiëntscenario's en leer omgaan met verschillende gezondheidsbehoeften.</p>
+                        <button id="home-to-patients" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Bekijk patiënten
+                        </button>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h3 class="font-bold text-lg mb-2">Kennisbank</h3>
+                        <p>Toegang tot evidence-based richtlijnen en de nieuwste inzichten in voedingsleer.</p>
+                        <button id="home-to-knowledge" class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                            Open kennisbank
+                        </button>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                        <h3 class="font-bold text-lg mb-2">Oefenmodule</h3>
+                        <p>Verbeter je adviesvaardigheden door virtuele gesprekken met patiënten te oefenen.</p>
+                        <button id="home-to-practice" class="mt-4 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                            Start oefening
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PATIENTS VIEW -->
+        <div id="patients-view" class="view">
+            <h2 class="text-2xl font-bold mb-4">Patiëntprofielen</h2>
+            <p class="mb-6">
+                Kies een patiëntprofiel om te werken aan een gepersonaliseerd voedingsadvies.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-blue-100 p-3">
+                        <h3 class="text-xl font-bold">Patiënt A</h3>
+                        <p>45 jaar, Vrouw</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="mb-2">
+                            <span class="font-semibold">Aandoeningen:</span> Type 2 diabetes, Hypertensie
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-semibold">Allergieën:</span> Noten, Schelpdieren
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-semibold">Doel:</span> Gewichtsverlies, bloedsuikerbeheer
+                        </div>
+                        <button data-patient="patient-a" class="select-patient mt-3 w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Selecteer patiënt
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-blue-100 p-3">
+                        <h3 class="text-xl font-bold">Patiënt B</h3>
+                        <p>28 jaar, Man</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="mb-2">
+                            <span class="font-semibold">Aandoeningen:</span> IBS, Lactose-intolerantie
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-semibold">Allergieën:</span> Lactose
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-semibold">Doel:</span> Symptoombeheersing IBS, Spieropbouw
+                        </div>
+                        <button data-patient="patient-b" class="select-patient mt-3 w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Selecteer patiënt
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-blue-100 p-3">
+                        <h3 class="text-xl font-bold">Patiënt C</h3>
+                        <p>67 jaar, Man</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="mb-2">
+                            <span class="font-semibold">Aandoeningen:</span> Hartfalen, Nierfunctiestoornis
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-semibold">Allergieën:</span> Geen
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-semibold">Doel:</span> Zoutbeperking, vochtbalans
+                        </div>
+                        <button data-patient="patient-c" class="select-patient mt-3 w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Selecteer patiënt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PATIENT DETAIL VIEW -->
+        <div id="patient-detail-view" class="view">
+            <button id="back-to-patients" class="mb-4 flex items-center text-blue-600 hover:text-blue-800">
+                ← Terug naar patiëntenlijst
+            </button>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-blue-600 text-white p-4">
+                    <h2 id="patient-name" class="text-2xl font-bold">Patiënt A</h2>
+                    <p id="patient-demographics" class="text-blue-100">
+                        45 jaar, Vrouw | 168 cm, 85 kg
+                    </p>
+                </div>
+                
+                <div class="p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h3 class="text-lg font-bold mb-2">Gezondheidsinformatie</h3>
+                            <ul class="space-y-2">
+                                <li><span class="font-semibold">BMI:</span> <span id="patient-bmi">30.1</span></li>
+                                <li><span class="font-semibold">Aandoeningen:</span> <span id="patient-conditions">Type 2 diabetes, Hypertensie</span></li>
+                                <li><span class="font-semibold">Allergieën:</span> <span id="patient-allergies">Noten, Schelpdieren</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-2">Leefstijl & Voorkeuren</h3>
+                            <ul class="space-y-2">
+                                <li><span class="font-semibold">Activiteit:</span> <span id="patient-activity">Kantoorbaan, 2x per week lichte beweging</span></li>
+                                <li><span class="font-semibold">Voorkeuren:</span> <span id="patient-preferences">Lokaal geproduceerd voedsel, Vegetarische opties</span></li>
+                                <li><span class="font-semibold">Doelen:</span> <span id="patient-goals">Gewichtsverlies, bloedsuikerbeheer</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h3 class="text-xl font-bold mb-4">Voedingsadvies opstellen</h3>
+                        
+                        <div class="border-b border-gray-200">
+                            <nav class="flex -mb-px">
+                                <button id="tab-general" class="advice-tab py-2 px-4 border-b-2 border-blue-500 text-blue-600 font-medium text-sm">
+                                    Algemeen advies
+                                </button>
+                                <button id="tab-dietary" class="advice-tab ml-8 py-2 px-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm">
+                                    Voedingspatroon
+                                </button>
+                                <button id="tab-goals" class="advice-tab ml-8 py-2 px-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm">
+                                    Doelstellingen
+                                </button>
+                            </nav>
+                        </div>
+                        
+                        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                            <!-- Algemeen advies -->
+                            <div id="content-general" class="tab-content active-tab">
+                                <h4 class="font-bold mb-2">Algemeen voedingsadvies</h4>
+                                <p class="mb-4">
+                                    Gezien de aandoeningen en allergieën van de patiënt, zijn de volgende factoren belangrijk om in overweging te nemen:
+                                </p>
+                                <ul id="patient-recommendations" class="list-disc pl-5 space-y-1">
+                                    <li>Bloedglucoseregulatie door beperking van toegevoegde suikers en geraffineerde koolhydraten</li>
+                                    <li>Natriumbeperking (max. 2000mg per dag)</li>
+                                    <li>Vermijd noten</li>
+                                    <li>Vermijd schelpdieren</li>
+                                </ul>
+                                
+                                <textarea class="w-full p-3 border rounded-lg mt-4" rows="5" placeholder="Schrijf hier je persoonlijke advies voor deze patiënt..."></textarea>
+                                
+                                <div class="mt-4 flex justify-end">
+                                    <button id="save-advice" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                                        Advies opslaan
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Voedingspatroon -->
+                            <div id="content-dietary" class="tab-content">
+                                <h4 class="font-bold mb-2">Voedingspatroon</h4>
+                                <p>Stel een gepersonaliseerd voedingspatroon samen voor deze patiënt.</p>
+                                
+                                <div class="mt-4 bg-white p-4 rounded border">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h5 class="font-bold">Dagelijks voedingsschema</h5>
+                                        <button id="generate-plan" class="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200">
+                                            Voorbeeldplan genereren
+                                        </button>
+                                    </div>
+                                    
+                                    <div id="allergy-warning" class="mb-3 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm">
+                                        <strong>⚠️ Let op: vermijd alle notenproducten</strong>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <div class="mb-4">
+                                                <div class="flex justify-between">
+                                                    <label class="block text-sm font-medium mb-1">Ontbijt</label>
+                                                    <div class="relative group">
+                                                        <button class="text-xs text-blue-600 hover:text-blue-800">
+                                                            Suggesties ▾
+                                                        </button>
+                                                        <div class="absolute right-0 mt-1 hidden group-hover:block bg-white border border-gray-200 rounded shadow-lg p-2 z-10 w-64">
+                                                            <p class="text-xs mb-1 font-medium">Voeg toe:</p>
+                                                            <div class="text-xs p-1 hover:bg-blue-50 cursor-pointer rounded breakfast-suggestion">
+                                                                Havermout met lijnzaad en bessen (geen toegevoegde suiker)
+                                                            </div>
+                                                            <div class="text-xs p-1 hover:bg-blue-50 cursor-pointer rounded breakfast-suggestion">
+                                                                Volkoren brood met avocado en een gekookt ei
+                                                            </div>
+                                                            <div class="text-xs p-1 hover:bg-blue-50 cursor-pointer rounded breakfast-suggestion">
+                                                                Griekse yoghurt met bessen en kaneel
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <textarea id="breakfast-input" class="w-full p-2 border rounded" rows="3"></textarea>
+                                            </div>
+                                            
+                                            <div class="mb-4">
+                                                <div class="flex justify-between">
+                                                    <label class="block text-sm font-medium mb-1">Lunch</label>
+                                                    <div class="relative group">
+                                                        <button class="text-xs text-blue-600 hover:text-blue-800">
+                                                            Suggesties ▾
+                                                        </button>
+                                                        <div class="absolute right-0 mt-1 hidden group-hover:block bg-white border border-gray-200 rounded shadow-lg p-2 z-10 w-64">
+                                                            <p class="text-xs mb-1 font-medium">Voeg toe:</p>
+                                                            <div class="text-xs p-1 hover:bg-blue-50 cursor-pointer rounded lunch-suggestion">
+                                                                Salade met kikkererwten, groenten en olijfolie
+                                                            </div>
+                                                            <div class="text-xs p-1 hover:bg-blue-50 cursor-pointer rounded lunch-suggestion">
+                                                                Volkoren wrap met hummus en gegrilde groenten
+                                                            </div>
+                                                            <div class="text-xs p-1 hover:bg-blue-50 cursor-pointer rounded lunch-suggestion">
+                                                                Linzensoep met een stuk volkoren brood
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <textarea id="lunch-input" class="w-full p-2 border rounded" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div class="mb-4">
+                                                <label class="block text-sm font-medium mb-1">Avondmaaltijd</label>
+                                                <textarea id="dinner-input" class="w-full p-2 border rounded" rows="3"></textarea>
+                                            </div>
+                                            
+                                            <div class="mb-4">
+                                                <label class="block text-sm font-medium mb-1">Tussendoortjes</label>
+                                                <textarea id="snacks-input" class="w-full p-2 border rounded" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="saved-plan" class="mt-4 p-3 bg-green-50 border border-green-200 rounded hidden">
+                                    <h5 class="font-medium text-green-800 mb-2">Opgeslagen voedingsplan</h5>
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <p class="font-medium">Ontbijt:</p>
+                                            <p id="saved-breakfast" class="whitespace-pre-line"></p>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">Lunch:</p>
+                                            <p id="saved-lunch" class="whitespace-pre-line"></p>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">Avondmaaltijd:</p>
+                                            <p id="saved-dinner" class="whitespace-pre-line"></p>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">Tussendoortjes:</p>
+                                            <p id="saved-snacks" class="whitespace-pre-line"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 flex justify-between items-center">
+                                    <div id="plan-feedback" class="p-2 rounded hidden"></div>
+                                    <div class="ml-auto">
+                                        <button id="save-plan" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                                            Voedingsplan opslaan
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Doelstellingen -->
+                            <div id="content-goals" class="tab-content">
+                                <h4 class="font-bold mb-2">Doelstellingen</h4>
+                                <p class="mb-3">
+                                    Stel doelstellingen op voor deze patiënt op basis van de gestelde doelen: <strong id="goal-targets">Gewichtsverlies, bloedsuikerbeheer</strong>
+                                </p>
+                                
+                                <div class="bg-white p-4 rounded border">
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium mb-1">Korte termijn doelen (4 weken)</label>
+                                        <textarea id="short-goals" class="w-full p-2 border rounded" rows="2"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium mb-1">Middellange termijn doelen (3 maanden)</label>
+                                        <textarea id="mid-goals" class="w-full p-2 border rounded" rows="2"></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Lange termijn doelen (6+ maanden)</label>
+                                        <textarea id="long-goals" class="w-full p-2 border rounded" rows="2"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 flex justify-end">
+                                    <button id="save-goals" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                                        Doelen opslaan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KNOWLEDGE VIEW -->
+        <div id="knowledge-view" class="view">
+            <h2 class="text-2xl font-bold mb-4">Kennisbank</h2>
+            <p class="mb-6">
+                Toegang tot evidence-based richtlijnen en de nieuwste inzichten in de voedingsleer.
+            </p>
+            
+            <div id="knowledge-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg mb-3">Klinische Richtlijnen</h3>
+                    <ul class="space-y-2">
+                        <li id="open-diabetes" class="text-blue-600 hover:underline cursor-pointer">Richtlijn Diabetes Mellitus type 2</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Richtlijn Cardiovasculair Risicomanagement</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Richtlijn Obesitas</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Richtlijn Ondervoeding</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Richtlijn Voeding bij Nierfunctiestoornissen</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg mb-3">Wetenschappelijk Onderzoek</h3>
+                    <ul class="space-y-2">
+                        <li class="text-blue-600 hover:underline cursor-pointer">Mediterraan dieet en cardiovasculaire gezondheid</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Effecten van intermittent fasting</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Voedingsinterventies bij metabole ziekten</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Darmmicrobioom en voeding</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Plantaardige eiwitten en gezondheid</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg mb-3">Praktische Hulpmiddelen</h3>
+                    <ul class="space-y-2">
+                        <li class="text-blue-600 hover:underline cursor-pointer">Voedingswaardentabel</li>
+                        <li id="open-bmi" class="text-blue-600 hover:underline cursor-pointer">BMI Calculator</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Energiebehoefte Calculator</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Voedingsdagboek Template</li>
+                        <li class="text-blue-600 hover:underline cursor-pointer">Patientenvoorlichting Materialen</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DIABETES DOCUMENT -->
+        <div id="diabetes-document" class="view">
+            <button id="back-from-diabetes" class="mb-4 flex items-center text-blue-600 hover:text-blue-800">
+                ← Terug naar kennisbank
+            </button>
+            
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Richtlijn Diabetes Mellitus type 2</h3>
+                    <span class="text-gray-500 text-sm">Laatste update: maart 2025</span>
+                </div>
+                
+                <div class="prose max-w-none">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-6">
+                        <h4 class="text-lg font-semibold text-blue-800">Samenvatting voor diëtisten</h4>
+                        <p>
+                            Deze richtlijn geeft aanbevelingen voor voedingsadvies aan patiënten met 
+                            diabetes mellitus type 2. De focus ligt op een geïndividualiseerde benadering 
+                            waarbij rekening wordt gehouden met comorbiditeiten, culturele factoren en persoonlijke 
+                            voorkeuren van de patiënt, met het doel om glycemische controle te verbeteren en 
+                            cardiovasculaire risicofactoren te verminderen.
+                        </p>
+                    </div>
+                    
+                    <h4 class="text-lg font-semibold mt-4">1. Algemene aanbevelingen</h4>
+                    <p>
+                        Voor mensen met diabetes type 2 wordt een gevarieerde voeding aanbevolen 
+                        met beperking van geraffineerde koolhydraten en toegevoegde suikers. Het dieetpatroon
+                        dient gebaseerd te zijn op volkorenproducten, peulvruchten, groenten, fruit, mager eiwit
+                        en gezonde vetten.
+                    </p>
+                    
+                    <h4 class="text-lg font-semibold mt-4">2. Koolhydraten</h4>
+                    <p>
+                        Aanbevolen wordt een verlaging van de totale hoeveelheid koolhydraten, 
+                        met nadruk op het verminderen van snel absorbeerbare koolhydraten zoals 
+                        suiker, frisdrank, vruchtensappen en witte graanproducten.
+                    </p>
+                    
+                    <h4 class="text-lg font-semibold mt-4">3. Vetten</h4>
+                    <p>
+                        Beperk verzadigde vetten tot minder dan 10% van de totale energie-inname. 
+                        Vervang deze door onverzadigde vetten uit plantaardige bronnen en vette vis.
+                    </p>
+                    
+                    <h4 class="text-lg font-semibold mt-4">4. Voedingsvezel</h4>
+                    <p>
+                        Streven naar dagelijks minimaal 30-40 gram voedingsvezel uit volkorenproducten, 
+                        peulvruchten, groenten en fruit.
+                    </p>
+                    
+                    <h4 class="text-lg font-semibold mt-4">5. Praktische adviezen</h4>
+                    <ul>
+                        <li>Spreid koolhydraten over de dag</li>
+                        <li>Combineer koolhydraten met eiwitten, vetten en vezels</li>
+                        <li>Gebruik meetmomenten om inzicht te krijgen in de persoonlijke glucoserespons</li>
+                        <li>Adviseer regelmatige lichaamsbeweging na de maaltijd</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-semibold mt-4">6. Voorbeeldverdeling macronutriënten</h4>
+                    <table class="border-collapse border border-gray-300 w-full mt-2">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-300 p-2">Macronutriënt</th>
+                                <th class="border border-gray-300 p-2">Percentage energie</th>
+                                <th class="border border-gray
